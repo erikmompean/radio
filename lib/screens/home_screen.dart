@@ -44,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      // color: Color(0xFF171620),
       decoration: const BoxDecoration(
           gradient: LinearGradient(
         colors: [Color(0xff1a112a), Color(0xff2a1733), Color(0xff1a112a)],

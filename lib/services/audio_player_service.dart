@@ -6,7 +6,7 @@ class AudioPlayerService implements IRadioPlayerService {
 
   @override
   void initialize() {
-    /// Using withId we ensure that we are using the same instance of the player
+    // Using withId we ensure that we are using the same instance of the player
     assetsAudioPlayer ??= AssetsAudioPlayer.withId('radio_player');
   }
 

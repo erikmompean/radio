@@ -125,7 +125,6 @@ class DetailScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    // tags
                     Wrap(
                       runSpacing: 4,
                       children: currentRadioStation.tags
@@ -150,7 +149,6 @@ class DetailScreen extends StatelessWidget {
                           .toList(),
                     ),
                     const SizedBox(height: 20),
-
                     Expanded(
                       child: Center(
                         child: ScaleAnimationButton(

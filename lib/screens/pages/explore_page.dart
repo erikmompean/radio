@@ -5,19 +5,8 @@ import 'package:radio/routes/route_names.dart';
 import 'package:radio/widgets/icon_mask.dart';
 import 'package:radio/widgets/scale_animation_button.dart';
 
-class ExplorePage extends StatefulWidget {
+class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});
-
-  @override
-  State<ExplorePage> createState() => _ExplorePageState();
-}
-
-class _ExplorePageState extends State<ExplorePage> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
