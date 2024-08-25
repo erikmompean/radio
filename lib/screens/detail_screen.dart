@@ -214,18 +214,12 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Widget volumeSlider(double volume, Function(double) onChanged) {
-    return SliderTheme(
-      data: SliderTheme.of(context).copyWith(
-        trackHeight: 1.0,
-      ),
-      child: Slider(
-        value: volume,
-        onChanged: onChanged,
-        activeColor: AppColors.primary,
-        inactiveColor: Colors.white,
-        min: 0.0,
-        max: 1.0,
-      ),
+    return CupertinoSlider(
+      value: volume,
+      onChanged: onChanged,
+      activeColor: AppColors.primary,
+      min: 0.0,
+      max: 1.0,
     );
   }
 }
