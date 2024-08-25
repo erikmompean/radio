@@ -14,7 +14,9 @@ class VolumeManagerProvider extends ChangeNotifier {
   VolumeManagerProvider(this._radioPlayerService);
 
   Future<void> initialize() async {
-    _volume = await _radioPlayerService.getVolume();
+    _volume = await getVolume();
+
+    notifyListeners();
     _volumeSubscription =
         _radioPlayerService.getVolumeStream().listen((volume) {
       _volume = volume;
@@ -28,7 +30,7 @@ class VolumeManagerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getVolume() {
+  Future<double> getVolume() {
     return _radioPlayerService.getVolume();
   }
 
