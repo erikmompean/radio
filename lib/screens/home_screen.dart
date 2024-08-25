@@ -58,8 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget home() {
-    // var currentScreen =
-    //     Provider.of<HomeScreenStateProvider>(context, listen: false);
+
     return Stack(
       children: [
         Column(

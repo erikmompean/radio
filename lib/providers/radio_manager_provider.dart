@@ -43,6 +43,10 @@ class RadioManagerProvider extends ChangeNotifier {
   }
 
   void setCurrentRadioStation(RadioStation radioStation) {
+    if (_isCurrentRadioStation(radioStation)) {
+      return;
+    }
+
     if (radioStatus == RadioStatus.playing) {
       stop();
     }
