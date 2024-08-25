@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:radio/providers/models/main_list_page_provider.dart';
 import 'package:radio/providers/radio_manager_provider.dart';
 import 'package:radio/providers/radio_storage_provider.dart';
+import 'package:radio/providers/volume_manager_provider.dart';
 import 'package:radio/routes/routes.dart';
 import 'package:radio/services/api_radio_browser.dart';
 import 'package:radio/services/audio_player_service.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<RadioManagerProvider>(
             create: (_) => RadioManagerProvider(
                 AudioPlayerService(), StorageServiceSingleton.instance)),
+        ChangeNotifierProvider<VolumeManagerProvider>(
+            create: (_) => VolumeManagerProvider(AudioPlayerService())),
         ChangeNotifierProvider<MainListPageProvider>(
             create: (_) => MainListPageProvider(ApiRadioBrowser.instance)),
         ChangeNotifierProvider(

@@ -1,5 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:radio/interfaces/i_radio_player_service.dart';
+import 'package:real_volume/real_volume.dart';
 
 class AudioPlayerService implements IRadioPlayerService {
   AssetsAudioPlayer? assetsAudioPlayer;
@@ -35,7 +36,6 @@ class AudioPlayerService implements IRadioPlayerService {
     await assetsAudioPlayer!.pause();
   }
 
-
   @override
   void switchRadioStation(String url) async {
     if (assetsAudioPlayer == null) {
@@ -46,8 +46,24 @@ class AudioPlayerService implements IRadioPlayerService {
       await assetsAudioPlayer!.open(
         Audio.liveStream(url),
       );
-    } catch (t) {
+    } catch (_) {
       throw Exception('Failed to open audio stream');
     }
+  }
+
+  @override
+  Future<void> setVolume(double volume) async {
+    await RealVolume.setVolume(volume,
+        showUI: true, streamType: StreamType.MUSIC);
+  }
+
+  @override
+  Stream<double> getVolumeStream() {
+    return RealVolume.onVolumeChanged.map((event) => event.volumeLevel);
+  }
+
+  @override
+  Future<double> getVolume() async {
+    return (await RealVolume.getCurrentVol(StreamType.MUSIC)) ?? 0.0;
   }
 }

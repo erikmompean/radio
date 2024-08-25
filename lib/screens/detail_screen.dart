@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:radio/enum/radio_status.dart';
 import 'package:radio/providers/radio_manager_provider.dart';
 import 'package:radio/providers/radio_storage_provider.dart';
+import 'package:radio/providers/volume_manager_provider.dart';
 import 'package:radio/utils/app_colors.dart';
 import 'package:radio/utils/standard.dart';
 import 'package:radio/widgets/delayed_backdrop_filter.dart';
@@ -12,8 +13,21 @@ import 'package:radio/widgets/icon_mask.dart';
 import 'package:radio/widgets/scale_animation_button.dart';
 import 'package:radio/widgets/speaker_animation.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key});
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<VolumeManagerProvider>(context, listen: false).initialize();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +162,6 @@ class DetailScreen extends StatelessWidget {
                           )
                           .toList(),
                     ),
-                    const SizedBox(height: 20),
                     Expanded(
                       child: Center(
                         child: ScaleAnimationButton(
@@ -171,12 +184,47 @@ class DetailScreen extends StatelessWidget {
                             )),
                       ),
                     ),
+                    Consumer<VolumeManagerProvider>(
+                        builder: (context, volumeManager, _) {
+                      return Row(children: [
+                        IconMask(
+                          child: volumeManager.volume == 0
+                              ? const Icon(CupertinoIcons.volume_off,
+                                  color: Colors.white)
+                              : const Icon(CupertinoIcons.volume_up,
+                                  color: Colors.white),
+                        ),
+                        Expanded(
+                          child:
+                              volumeSlider(volumeManager.volume, (value) async {
+                            await volumeManager.setVolume(value);
+                          }),
+                        ),
+                      ]);
+                    }),
+                    const SizedBox(height: 30),
                   ],
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget volumeSlider(double volume, Function(double) onChanged) {
+    return SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+        trackHeight: 1.0,
+      ),
+      child: Slider(
+        value: volume,
+        onChanged: onChanged,
+        activeColor: AppColors.primary,
+        inactiveColor: Colors.white,
+        min: 0.0,
+        max: 1.0,
       ),
     );
   }

@@ -1,8 +1,4 @@
-
-
-
-
-abstract class IRadioPlayerService {  
+abstract class IRadioPlayerService {
   void initialize();
 
   void play();
@@ -12,4 +8,10 @@ abstract class IRadioPlayerService {
   void pause();
 
   void switchRadioStation(String url);
+
+  Future<void> setVolume(double volume);
+
+  Stream<double> getVolumeStream();
+
+  Future<double> getVolume();
 }

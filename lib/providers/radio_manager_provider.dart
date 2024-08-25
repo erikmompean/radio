@@ -5,12 +5,14 @@ import 'package:radio/models/radio_station.dart';
 import 'package:radio/services/shared_preferences_service.dart';
 
 class RadioManagerProvider extends ChangeNotifier {
-  final IRadioPlayerService _radioPlayerService;
+  // Planning to add last played radio station in the future
   final StorageServiceSingleton _storageService;
-  RadioStatus _radioStatus = RadioStatus.unInitialized;
 
-  RadioStatus get radioStatus => _radioStatus;
+  final IRadioPlayerService _radioPlayerService;
+
+  RadioStatus _radioStatus = RadioStatus.unInitialized;
   RadioStation? currentRadioStation;
+  RadioStatus get radioStatus => _radioStatus;
 
   RadioManagerProvider(this._radioPlayerService, this._storageService) {
     initialize();
