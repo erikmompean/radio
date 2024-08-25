@@ -29,7 +29,7 @@ flutter pub get
 flutter run
 ```
 
-Or you can make an apk and install it on your phone:
+Or you can make an apk and install it on your phone (Recommended):
 
 ```sh
 flutter build apk
